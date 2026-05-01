@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+coverage/
+*.log
+
+# Environment and local config
+.env
+.env.*
+!.env.example
+
+# Tooling and editors
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+.specify/

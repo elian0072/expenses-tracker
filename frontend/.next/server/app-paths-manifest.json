@@ -1,0 +1,6 @@
+{
+  "/(authenticated)/activity/page": "app/(authenticated)/activity/page.js",
+  "/(authenticated)/years/[year]/page": "app/(authenticated)/years/[year]/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js"
+}
