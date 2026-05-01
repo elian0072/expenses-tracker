@@ -1,0 +1,43 @@
+[project]
+name = "expenses-backend"
+version = "0.1.0"
+description = "Annual household expense tracker backend"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.14.0",
+  "email-validator>=2.2.0",
+  "fastapi>=0.115.0",
+  "pydantic-settings>=2.6.0",
+  "python-multipart>=0.0.12",
+  "sqlalchemy>=2.0.36",
+  "uvicorn[standard]>=0.32.0",
+  "psycopg[binary]>=3.2.0",
+  "passlib[bcrypt]>=1.7.4",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.28.0",
+  "mypy>=1.13.0",
+  "pytest>=8.3.3",
+  "pytest-asyncio>=0.24.0",
+  "ruff>=0.7.3",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B008"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true

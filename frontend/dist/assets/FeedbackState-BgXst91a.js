@@ -1,0 +1,1 @@
+import{j as e}from"./index-BzER2YCF.js";import{A as n}from"./TextField-CgmPi-fV.js";function l({state:i,message:r}){return i==="idle"||!r?null:i==="loading"?e.jsx(n,{severity:"info",children:r}):i==="error"?e.jsx(n,{severity:"error",children:r}):e.jsx(n,{severity:"success",children:r})}export{l as F};
