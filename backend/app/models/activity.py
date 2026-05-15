@@ -22,6 +22,7 @@ class ActivityAction(enum.StrEnum):
 class ActivitySubjectType(enum.StrEnum):
     expense = "expense"
     member = "member"
+    calendar_event = "calendar_event"
 
 
 class ActivityRecord(Base):

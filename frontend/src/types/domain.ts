@@ -58,3 +58,38 @@ export type AdminUser = {
   last_login_at: string | null;
   created_at: string;
 };
+
+export type RecurrenceRule = "none" | "daily" | "weekly" | "monthly";
+
+export type CalendarEventCreator = {
+  id: string;
+  display_name: string;
+};
+
+export type CalendarEvent = {
+  id: string;
+  title: string;
+  starts_at: string;
+  ends_at: string;
+  all_day: boolean;
+  notes: string | null;
+  recurrence_rule: RecurrenceRule;
+  recurrence_end: string | null;
+  version: number;
+  created_by: CalendarEventCreator;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CalendarEventOccurrence = {
+  event_id: string;
+  title: string;
+  starts_at: string;
+  ends_at: string;
+  all_day: boolean;
+  notes: string | null;
+  recurrence_rule: RecurrenceRule;
+  is_recurring: boolean;
+  created_by: CalendarEventCreator;
+  version: number;
+};

@@ -2,6 +2,7 @@
 .gitignore
 node_modules/
 **/node_modules/
+**/.venv/
 .next/
 coverage/
 dist/

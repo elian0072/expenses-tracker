@@ -21,6 +21,9 @@ const ActivityPage = lazy(() =>
 const UsersPage = lazy(() =>
   import("@/features/users/pages/UsersPage").then((module) => ({ default: module.UsersPage }))
 );
+const CalendarPage = lazy(() =>
+  import("@/features/calendar/pages/CalendarPage").then((module) => ({ default: module.CalendarPage }))
+);
 const ProfilePage = lazy(() =>
   import("@/features/profile/pages/ProfilePage").then((module) => ({ default: module.ProfilePage }))
 );
@@ -59,6 +62,7 @@ export function AppRouter() {
           }
         >
           <Route path="/expenses" element={<ExpensesPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route
             path="/users"
@@ -69,7 +73,7 @@ export function AppRouter() {
             }
           />
           <Route
-            path="/activity"
+            path="/logs"
             element={
               <RequireAdmin>
                 <ActivityPage />

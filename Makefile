@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 
-.PHONY: bootstrap dev dev-frontend test lint docker-up docker-down rebuild
+.PHONY: bootstrap dev dev-frontend test lint docker-up docker-down docker-nuke rebuild
 
 bootstrap:
 	cd backend && uv sync --extra dev
@@ -25,6 +25,9 @@ docker-up:
 	docker compose up --build
 
 docker-down:
+	docker compose down --remove-orphans
+
+docker-nuke:
 	docker compose down -v --remove-orphans
 
 rebuild:

@@ -10,7 +10,7 @@ COPY backend/ruff.toml /app/backend/ruff.toml
 COPY backend/mypy.ini /app/backend/mypy.ini
 COPY backend /app/backend
 
-RUN uv sync
+RUN rm -rf .venv && uv sync
 
 EXPOSE 8000
 

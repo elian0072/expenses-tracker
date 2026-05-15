@@ -1,3 +1,4 @@
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -32,10 +33,11 @@ export function SidebarNav({ desktop, mobileOpen, onCloseMobile, user }: Props) 
   const location = useLocation();
   const items: Array<{ key: string; label: string; href: string; icon: ReactNode }> = [
     { key: "expenses", label: "Expenses", href: "/expenses", icon: <ReceiptLongIcon fontSize="small" /> },
+    { key: "calendar", label: "Calendar", href: "/calendar", icon: <CalendarMonthIcon fontSize="small" /> },
   ];
   if (user.is_admin) {
     items.push({ key: "users", label: "Users", href: "/users", icon: <PeopleAltIcon fontSize="small" /> });
-    items.push({ key: "activity", label: "Activity", href: "/activity", icon: <EventNoteIcon fontSize="small" /> });
+    items.push({ key: "logs", label: "Logs", href: "/logs", icon: <EventNoteIcon fontSize="small" /> });
   }
 
   const content = (
