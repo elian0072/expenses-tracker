@@ -5,8 +5,6 @@ services:
       POSTGRES_USER: expenses
       POSTGRES_PASSWORD: expenses
       POSTGRES_DB: expenses
-    ports:
-      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U expenses -d expenses"]
       interval: 5s
@@ -21,12 +19,18 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     env_file:
-      - .env.example
+      - .env
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "8000:8000"
+    networks:
+      - default
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.expenses-api.entrypoints=websecure"
+      - "traefik.http.routers.expenses-api.rule=Host(`expenses.app-jba.ovh`) && PathPrefix(`/api`)"
+      - "traefik.http.services.expenses-api.loadbalancer.server.port=8000"
     volumes:
       - ./backend:/app/backend
       - /app/backend/.venv
@@ -47,12 +51,17 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
     environment:
-      VITE_API_BASE_URL: http://localhost:8000
+      VITE_API_BASE_URL: https://expenses.app-jba.ovh
     depends_on:
       backend:
         condition: service_healthy
-    ports:
-      - "3000:3000"
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.expenses-front.entrypoints=websecure"
+      - "traefik.http.routers.expenses-front.rule=Host(`expenses.app-jba.ovh`)"
+      - "traefik.http.services.expenses-front.loadbalancer.server.port=3000"
     volumes:
       - ./frontend:/app/frontend
       - /app/frontend/node_modules
@@ -62,6 +71,10 @@ services:
       timeout: 5s
       retries: 10
       start_period: 20s
+
+networks:
+  proxy:
+    external: true
 
 volumes:
   postgres_data:
