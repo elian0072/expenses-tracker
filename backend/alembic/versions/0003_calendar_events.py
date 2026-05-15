@@ -29,7 +29,7 @@ def upgrade() -> None:
         sa.Column("ends_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column("all_day", sa.Boolean(), nullable=False, server_default=sa.text("false")),
         sa.Column("notes", sa.Text(), nullable=True),
-        sa.Column("recurrence_rule", recurrence_enum, nullable=False, server_default="none"),
+        sa.Column("recurrence_rule", sa.Enum("none", "daily", "weekly", "monthly", name="recurrencerule", create_type=False), nullable=False, server_default="none"),
         sa.Column("recurrence_end", sa.Date(), nullable=True),
         sa.Column("version", sa.Integer(), nullable=False, server_default="1"),
         sa.Column("created_by_id", sa.Uuid(), nullable=False),
@@ -44,8 +44,8 @@ def upgrade() -> None:
     op.create_index("ix_calendar_events_created_by_id", "calendar_events", ["created_by_id"], unique=False)
 
     if bind.dialect.name == "postgresql":
-        op.execute("ALTER TYPE activitysubjecttype ADD VALUE IF NOT EXISTS 'calendar_event'")
-
+        with op.get_context().autocommit_block():
+            op.execute("ALTER TYPE activitysubjecttype ADD VALUE IF NOT EXISTS 'calendar_event'")
 
 def downgrade() -> None:
     bind = op.get_bind()

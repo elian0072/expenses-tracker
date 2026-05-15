@@ -28,6 +28,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       - "traefik.http.routers.expenses-api.entrypoints=websecure"
       - "traefik.http.routers.expenses-api.rule=Host(`expenses.app-jba.ovh`) && PathPrefix(`/api`)"
       - "traefik.http.services.expenses-api.loadbalancer.server.port=8000"
